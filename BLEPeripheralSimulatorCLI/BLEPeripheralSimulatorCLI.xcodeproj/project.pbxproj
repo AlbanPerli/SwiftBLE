@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		617B104822A95B4600C7F384 /* ScenarioFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B104722A95B4600C7F384 /* ScenarioFactory.swift */; };
+		617B104D22A95B4F00C7F384 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B104A22A95B4F00C7F384 /* ArrayExtensions.swift */; };
+		617B104E22A95B4F00C7F384 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B104B22A95B4F00C7F384 /* StringExtensions.swift */; };
+		617B104F22A95B4F00C7F384 /* DataConvertibleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B104C22A95B4F00C7F384 /* DataConvertibleExtensions.swift */; };
 		61D3AFB822A7B48600674DBE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D3AFB722A7B48600674DBE /* main.swift */; };
 		61D3AFC522A7B49100674DBE /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D3AFC022A7B49100674DBE /* PeripheralController.swift */; };
 		61D3AFC622A7B49100674DBE /* CharacteristicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D3AFC122A7B49100674DBE /* CharacteristicController.swift */; };
@@ -34,6 +38,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		617B104722A95B4600C7F384 /* ScenarioFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenarioFactory.swift; sourceTree = "<group>"; };
+		617B104A22A95B4F00C7F384 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		617B104B22A95B4F00C7F384 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		617B104C22A95B4F00C7F384 /* DataConvertibleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConvertibleExtensions.swift; sourceTree = "<group>"; };
+		617B105022A95B6300C7F384 /* AuthScenario.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthScenario.txt; sourceTree = "<group>"; };
 		61D3AFB422A7B48600674DBE /* BLEPeripheralSimulatorCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BLEPeripheralSimulatorCLI; sourceTree = BUILT_PRODUCTS_DIR; };
 		61D3AFB722A7B48600674DBE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		61D3AFC022A7B49100674DBE /* PeripheralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralController.swift; sourceTree = "<group>"; };
@@ -61,6 +70,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		617B104922A95B4F00C7F384 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				617B104A22A95B4F00C7F384 /* ArrayExtensions.swift */,
+				617B104B22A95B4F00C7F384 /* StringExtensions.swift */,
+				617B104C22A95B4F00C7F384 /* DataConvertibleExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		61D3AFAB22A7B48600674DBE = {
 			isa = PBXGroup;
 			children = (
@@ -80,12 +99,14 @@
 		61D3AFB622A7B48600674DBE /* BLEPeripheralSimulatorCLI */ = {
 			isa = PBXGroup;
 			children = (
+				617B104922A95B4F00C7F384 /* Extensions */,
 				61D3AFDB22A7F8FD00674DBE /* Scenario */,
 				61D3AFDA22A7F7E900674DBE /* StandardService */,
 				61D3AFCB22A7BA4600674DBE /* Console */,
 				61D3AFBE22A7B49100674DBE /* BLESimu */,
 				61D3AFB722A7B48600674DBE /* main.swift */,
 				61D3AFD922A7E76C00674DBE /* ExampleGatt.json */,
+				617B105022A95B6300C7F384 /* AuthScenario.txt */,
 			);
 			path = BLEPeripheralSimulatorCLI;
 			sourceTree = "<group>";
@@ -131,6 +152,7 @@
 		61D3AFDB22A7F8FD00674DBE /* Scenario */ = {
 			isa = PBXGroup;
 			children = (
+				617B104722A95B4600C7F384 /* ScenarioFactory.swift */,
 				61D3AFE322A80C7800674DBE /* Stack.swift */,
 				61D3AFDC22A7F90B00674DBE /* Scenario.swift */,
 			);
@@ -195,15 +217,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				61D3AFDD22A7F90B00674DBE /* Scenario.swift in Sources */,
+				617B104F22A95B4F00C7F384 /* DataConvertibleExtensions.swift in Sources */,
 				61D3AFE422A80C7800674DBE /* Stack.swift in Sources */,
 				61D3AFD822A7C65600674DBE /* StandardCharacteristic.swift in Sources */,
+				617B104822A95B4600C7F384 /* ScenarioFactory.swift in Sources */,
 				61D3AFB822A7B48600674DBE /* main.swift in Sources */,
 				61D3AFCA22A7B71800674DBE /* ConsoleIO.swift in Sources */,
 				61D3AFC522A7B49100674DBE /* PeripheralController.swift in Sources */,
 				61D3AFD022A7BCF900674DBE /* PeripheralGATT.swift in Sources */,
 				61D3AFD422A7C2A700674DBE /* GattModel.swift in Sources */,
+				617B104D22A95B4F00C7F384 /* ArrayExtensions.swift in Sources */,
 				61D3AFCD22A7BAA500674DBE /* Options.swift in Sources */,
 				61D3AFC622A7B49100674DBE /* CharacteristicController.swift in Sources */,
+				617B104E22A95B4F00C7F384 /* StringExtensions.swift in Sources */,
 				61D3AFD622A7C52400674DBE /* StandardService.swift in Sources */,
 				61D3AFC722A7B49100674DBE /* ServiceController.swift in Sources */,
 			);

@@ -23,26 +23,31 @@ public class StandardCharacteristic: CharacteristicController {
     public func handleReadRequest(_ request: CBATTRequest, peripheral: CBPeripheralManager) {
         print("Did receive read request on \(self.characteristic.uuid)")
         
-        if let currentAction = scenario?.top,
-            currentAction is CentralReadAction
-                || currentAction is AckAction {
-            currentAction.performActionFor(request: request,peripheral: peripheral)
-            popScenario()
-        }else{
-            scenarioDidFinish?(false)
+        if let s = scenario {
+            if let currentAction = s.top,
+                currentAction is CentralReadAction
+                    || currentAction is AckAction {
+                currentAction.performActionFor(request: request,peripheral: peripheral)
+                popScenario()
+            }else{
+                scenarioDidFinish?(false)
+            }
         }
+        
         
     }
     
     public func handleWriteRequest(_ request: CBATTRequest, peripheral: CBPeripheralManager) {
         print("Did receive write request on \(self.characteristic.uuid)\n with value \(request.value ?? Data(repeating: 0, count: 0))")
         
-        if let currentAction = scenario?.top,
-            currentAction is CentralWriteAction {
-            currentAction.performActionFor(request: request,peripheral: peripheral)
-            popScenario()
-        }else{
-            scenarioDidFinish?(false)
+        if let s = scenario {
+            if let currentAction = s.top,
+                currentAction is CentralWriteAction {
+                currentAction.performActionFor(request: request,peripheral: peripheral)
+                popScenario()
+            }else{
+                scenarioDidFinish?(false)
+            }
         }
         
     }

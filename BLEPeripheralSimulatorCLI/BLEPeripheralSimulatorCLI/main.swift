@@ -31,7 +31,6 @@ let w1 = CBAttributePermissions.writeEncryptionRequired.rawValue // 8
 */
 
 
-
 if CommandLine.argc < 2 {
     consoleIO.writeMessage("Missing argument", to: OutputType.error)
     consoleIO.printUsage()
@@ -47,36 +46,27 @@ if CommandLine.argc < 2 {
         let gattModel = try? JSONDecoder().decode(Gatt.self, from: jsonData) {
         
         let periphGatt = PeripheralGatt(model: gattModel)
-        
         let periph = PeripheralController(config: periphGatt)
         try? periph.turnOn()
         
-        let authChar = periph.serviceControllers.first!.characteristics.filter{ $0.characteristic.uuid.uuidString == "499D456C-8691-4D00-87E2-8A34FB7551A3" }.first! as! StandardCharacteristic
-        let motionListChar = periph.serviceControllers.first!.characteristics.filter{ $0.characteristic.uuid.uuidString == "0E3A638E-B390-4610-BB9E-048A68BDD209" }.first! as! StandardCharacteristic
-       
-        let scenario = Scenarii()
+        let scenarioFileNames = ["AuthScenario.txt"]
         
-        let auth = scenario.auth()
-        let retrieveMotionList = scenario.retrieveMotionList()
-        
-        authChar.setupScenario(auth)
-        authChar.scenarioDidFinish = { success in
-            if success {
-                print("Auth Scenario finished")
+        for scenarioName in scenarioFileNames {
+            if let (uuid,stack) = ScenarioFactory.buildScenarioFromFileNamed(scenarioName){
+                let char = periph.serviceControllers.first!.characteristics.filter{ $0.characteristic.uuid.uuidString == uuid }.first! as! StandardCharacteristic
+                char.setupScenario(stack)
+                char.scenarioDidFinish = { success in
+                    if success {
+                        print("\(scenarioName) finished")
+                    }else{
+                        print("\(scenarioName) failed")
+                        CFRunLoopStop(runLoop)
+                    }
+                }
             }else{
-                print("Auth Scenario failed")
+                fatalError("Corrupted scenario file.")
             }
         }
-        
-        motionListChar.setupScenario(retrieveMotionList)
-        motionListChar.scenarioDidFinish = { success in
-            if success {
-                print("Motion Scenario finished")
-            }else{
-                print("Motion Scenario failed")
-            }
-        }
-        
         
         print("start")
         CFRunLoopRun()
