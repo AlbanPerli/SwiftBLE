@@ -10,8 +10,8 @@ import Foundation
 import CoreBluetooth
 
 protocol BLEAction {
-    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?)
-    typealias BLEActionCallBack = (CBATTRequest, CBPeripheralManager?)->()
+    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?) -> Bool?
+    typealias BLEActionCallBack = (CBATTRequest, CBPeripheralManager?)->(Bool)
 }
 
 final class UpdateCharValueAction: BLEAction {
@@ -19,18 +19,20 @@ final class UpdateCharValueAction: BLEAction {
     required init(data: Data) {
         self.updateData = data
     }
-    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?) {
+    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?) -> Bool? {
         peripheral?.updateValue(updateData!, for: request!.characteristic as! CBMutableCharacteristic, onSubscribedCentrals: nil)
+        return nil
     }
 }
 
 final class AckAction: BLEAction {
-    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?) {
+    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?) -> Bool? {
         guard let r = request,
             let p = peripheral else {
             fatalError("Request")
         }
         p.respond(to: r, withResult: .success)
+        return nil
     }
 }
 
@@ -41,11 +43,11 @@ final class CentralReadAction: BLEAction {
         self.action = actionToPerform
     }
     
-    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?) {
+    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?) -> Bool? {
         guard let r = request else {
-            fatalError("Request")
+            fatalError("Todo: manage empty Request")
         }
-        action?(r,peripheral)
+        return action?(r,peripheral)
     }
 }
 
@@ -56,99 +58,17 @@ final class CentralWriteAction: BLEAction {
         self.action = actionToPerform
     }
     
-    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?) {
+    func performActionFor(request:CBATTRequest?, peripheral:CBPeripheralManager?) -> Bool? {
         guard let r = request else {
-            fatalError("Request")
+            fatalError("Todo: manage empty Request")
         }
-        action?(r,peripheral)
+        return action?(r,peripheral)
     }
 }
 
-struct Scenarii {
- 
-}
-
-extension Scenarii {
-    
-    func auth() -> Stack<BLEAction> {
-        var actionList = [BLEAction]()
-        
-        actionList.append(CentralReadAction(actionToPerform: { (request,periph) in
-            request.value = Data([UInt8(0x01)])
-            periph?.respond(to: request, withResult: .success)
-        }))
-        actionList.append(CentralWriteAction(actionToPerform: { (request,periph) in
-            if let d = request.value {
-                if d == Data([UInt8(0x01)]) {
-                    periph?.respond(to: request, withResult: .success)
-                }
-            }else{
-                fatalError("Wrong auth")
-            }
-        }))
-        actionList.append(AckAction())
-        
-        actionList.append(CentralReadAction(actionToPerform: { (request,periph) in
-            request.value = Data([UInt8(0x02)])
-            periph?.respond(to: request, withResult: .success)
-        }))
-        actionList.append(CentralReadAction(actionToPerform: { (request,periph) in
-            request.value = Data([UInt8(0x03)])
-            periph?.respond(to: request, withResult: .success)
-        }))
-        actionList.append(CentralWriteAction(actionToPerform: { (request,periph) in
-            if let d = request.value {
-                if d == Data([UInt8(0x03)]) {
-                    periph?.respond(to: request, withResult: .success)
-                }
-            }else{
-                fatalError("Wrong auth")
-            }
-        }))
-        
-        actionList.append(AckAction())
-        
-        return Stack(array: actionList.reversed())
-    }
-    
-    func retrieveMotionList() -> Stack<BLEAction> {
-        var actionList = [BLEAction]()
-        
-        actionList.append(CentralReadAction(actionToPerform: { (request,periph) in
-            request.value = Data([UInt8(0x00)])
-            periph?.respond(to: request, withResult: .success)
-        }))
-        actionList.append(CentralWriteAction(actionToPerform: { (request,periph) in
-            if let d = request.value {
-                if d == Data([UInt8(0x01),UInt8(0x02)]) {
-                    periph?.respond(to: request, withResult: .success)
-                }
-            }else{
-                fatalError("Wrong format")
-            }
-        }))
-        actionList.append(AckAction())
-        
-        actionList.append(CentralReadAction(actionToPerform: { (request,periph) in
-            request.value = Data(Array(repeating: UInt8(0x01), count: 20))
-            periph?.respond(to: request, withResult: .success)
-        }))
-        actionList.append(CentralReadAction(actionToPerform: { (request,periph) in
-            request.value = Data(Array(repeating: UInt8(0x02), count: 20))
-            periph?.respond(to: request, withResult: .success)
-        }))
-        actionList.append(CentralWriteAction(actionToPerform: { (request,periph) in
-            if let d = request.value {
-                if d == Data([UInt8(0x01),UInt8(0x02)]) {
-                    periph?.respond(to: request, withResult: .success)
-                }
-            }else{
-                fatalError("Wrong format")
-            }
-        }))
-        actionList.append(AckAction())
-        
-        return Stack(array:actionList.reversed())
-    }
-    
+struct Scenario {
+    var name:String
+    var nextScenarios:[String]
+    var charUUID:String
+    var bleActions:Stack<BLEAction>
 }

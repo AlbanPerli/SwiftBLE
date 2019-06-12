@@ -13,10 +13,10 @@
                     "permissions": [1,2]
                 },
                 {
-                    "name" : "MotionList",
+                    "name" : "MoveBlind",
                     "uuid" : "0E3A638E-B390-4610-BB9E-048A68BDD209",
-                    "properties" : [2,8],
-                    "permissions": [1,2]
+                    "properties" : [8],
+                    "permissions": [2]
                 }
             ]
         }

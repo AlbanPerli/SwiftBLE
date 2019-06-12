@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BLEPeripheralSimulatorCLI/StandardService/StandardService.swift"
-            timestampString = "581449482.8186001"
+            filePath = "BLEPeripheralSimulatorCLI/Scenario/ScenarioFactory.swift"
+            timestampString = "582033741.164616"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "handleSubscribeToCharacteristic(characteristic:on:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "extractActionsAndNextScenariosFrom(actions:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,46 +73,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BLEPeripheralSimulatorCLI/StandardService/StandardService.swift"
-            timestampString = "581449482.818696"
+            filePath = "BLEPeripheralSimulatorCLI/StandardService/StandardCharacteristic.swift"
+            timestampString = "582033741.1647021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "handleSubscribeToCharacteristic(characteristic:on:)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "popScenario()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BLEPeripheralSimulatorCLI.StandardService.handleSubscribeToCharacteristic(characteristic: __C.CBCharacteristic, on: __C.CBPeripheralManager) -&gt; ()"
-                  moduleName = "BLEPeripheralSimulatorCLI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/al/Documents/Prog/GIT/BLE/BLEPeripheralSimulatorCLI/BLEPeripheralSimulatorCLI/StandardService/StandardService.swift"
-                  timestampString = "581524914.090031"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "55">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (BLEPeripheralSimulatorCLI.CharacteristicController) -&gt; Swift.Bool in BLEPeripheralSimulatorCLI.StandardService.handleSubscribeToCharacteristic(characteristic: __C.CBCharacteristic, on: __C.CBPeripheralManager) -&gt; ()"
-                  moduleName = "BLEPeripheralSimulatorCLI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/al/Documents/Prog/GIT/BLE/BLEPeripheralSimulatorCLI/BLEPeripheralSimulatorCLI/StandardService/StandardService.swift"
-                  timestampString = "581524914.091813"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "41">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -121,46 +89,30 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BLEPeripheralSimulatorCLI/StandardService/StandardService.swift"
-            timestampString = "581449482.818769"
+            filePath = "BLEPeripheralSimulatorCLI/StandardService/StandardCharacteristic.swift"
+            timestampString = "582033741.164754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "handleSubscribeToCharacteristic(characteristic:on:)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "updateCharValueIfNeeded()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BLEPeripheralSimulatorCLI.StandardService.handleSubscribeToCharacteristic(characteristic: __C.CBCharacteristic, on: __C.CBPeripheralManager) -&gt; ()"
-                  moduleName = "BLEPeripheralSimulatorCLI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/al/Documents/Prog/GIT/BLE/BLEPeripheralSimulatorCLI/BLEPeripheralSimulatorCLI/StandardService/StandardService.swift"
-                  timestampString = "581524914.098147"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "55">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (BLEPeripheralSimulatorCLI.CharacteristicController) -&gt; Swift.Bool in BLEPeripheralSimulatorCLI.StandardService.handleSubscribeToCharacteristic(characteristic: __C.CBCharacteristic, on: __C.CBPeripheralManager) -&gt; ()"
-                  moduleName = "BLEPeripheralSimulatorCLI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/al/Documents/Prog/GIT/BLE/BLEPeripheralSimulatorCLI/BLEPeripheralSimulatorCLI/StandardService/StandardService.swift"
-                  timestampString = "581524914.100405"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "41">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLEPeripheralSimulatorCLI/StandardService/StandardCharacteristic.swift"
+            timestampString = "582033741.164798"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "setupScenario(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

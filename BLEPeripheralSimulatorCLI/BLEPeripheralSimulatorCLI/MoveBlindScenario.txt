@@ -1,0 +1,4 @@
+0E3A638E-B390-4610-BB9E-048A68BDD209
+w[00:C8]?LockedMoveBlindScenario
+a
+sMoveBlindScenario

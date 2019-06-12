@@ -11,6 +11,8 @@
 		617B104D22A95B4F00C7F384 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B104A22A95B4F00C7F384 /* ArrayExtensions.swift */; };
 		617B104E22A95B4F00C7F384 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B104B22A95B4F00C7F384 /* StringExtensions.swift */; };
 		617B104F22A95B4F00C7F384 /* DataConvertibleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B104C22A95B4F00C7F384 /* DataConvertibleExtensions.swift */; };
+		617DCE3722AEA13A00890EE3 /* ScenarioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617DCE3622AEA13A00890EE3 /* ScenarioManager.swift */; };
+		617DCE3B22AEB3F900890EE3 /* PeripheralExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617DCE3A22AEB3F900890EE3 /* PeripheralExtension.swift */; };
 		61D3AFB822A7B48600674DBE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D3AFB722A7B48600674DBE /* main.swift */; };
 		61D3AFC522A7B49100674DBE /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D3AFC022A7B49100674DBE /* PeripheralController.swift */; };
 		61D3AFC622A7B49100674DBE /* CharacteristicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D3AFC122A7B49100674DBE /* CharacteristicController.swift */; };
@@ -43,6 +45,10 @@
 		617B104B22A95B4F00C7F384 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		617B104C22A95B4F00C7F384 /* DataConvertibleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConvertibleExtensions.swift; sourceTree = "<group>"; };
 		617B105022A95B6300C7F384 /* AuthScenario.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthScenario.txt; sourceTree = "<group>"; };
+		617DCE3622AEA13A00890EE3 /* ScenarioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioManager.swift; sourceTree = "<group>"; };
+		617DCE3822AEABE200890EE3 /* MoveBlindScenario.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = MoveBlindScenario.txt; sourceTree = "<group>"; };
+		617DCE3A22AEB3F900890EE3 /* PeripheralExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralExtension.swift; sourceTree = "<group>"; };
+		617DCE3C22AEBD9100890EE3 /* LockedMoveBlindScenario.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LockedMoveBlindScenario.txt; sourceTree = "<group>"; };
 		61D3AFB422A7B48600674DBE /* BLEPeripheralSimulatorCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BLEPeripheralSimulatorCLI; sourceTree = BUILT_PRODUCTS_DIR; };
 		61D3AFB722A7B48600674DBE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		61D3AFC022A7B49100674DBE /* PeripheralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralController.swift; sourceTree = "<group>"; };
@@ -80,6 +86,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		617DCE3922AEB3E700890EE3 /* PeripheralExtension */ = {
+			isa = PBXGroup;
+			children = (
+				617DCE3A22AEB3F900890EE3 /* PeripheralExtension.swift */,
+			);
+			path = PeripheralExtension;
+			sourceTree = "<group>";
+		};
 		61D3AFAB22A7B48600674DBE = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +121,8 @@
 				61D3AFB722A7B48600674DBE /* main.swift */,
 				61D3AFD922A7E76C00674DBE /* ExampleGatt.json */,
 				617B105022A95B6300C7F384 /* AuthScenario.txt */,
+				617DCE3822AEABE200890EE3 /* MoveBlindScenario.txt */,
+				617DCE3C22AEBD9100890EE3 /* LockedMoveBlindScenario.txt */,
 			);
 			path = BLEPeripheralSimulatorCLI;
 			sourceTree = "<group>";
@@ -143,6 +159,7 @@
 		61D3AFDA22A7F7E900674DBE /* StandardService */ = {
 			isa = PBXGroup;
 			children = (
+				617DCE3922AEB3E700890EE3 /* PeripheralExtension */,
 				61D3AFD522A7C52400674DBE /* StandardService.swift */,
 				61D3AFD722A7C65600674DBE /* StandardCharacteristic.swift */,
 			);
@@ -155,6 +172,7 @@
 				617B104722A95B4600C7F384 /* ScenarioFactory.swift */,
 				61D3AFE322A80C7800674DBE /* Stack.swift */,
 				61D3AFDC22A7F90B00674DBE /* Scenario.swift */,
+				617DCE3622AEA13A00890EE3 /* ScenarioManager.swift */,
 			);
 			path = Scenario;
 			sourceTree = "<group>";
@@ -228,6 +246,8 @@
 				61D3AFD422A7C2A700674DBE /* GattModel.swift in Sources */,
 				617B104D22A95B4F00C7F384 /* ArrayExtensions.swift in Sources */,
 				61D3AFCD22A7BAA500674DBE /* Options.swift in Sources */,
+				617DCE3722AEA13A00890EE3 /* ScenarioManager.swift in Sources */,
+				617DCE3B22AEB3F900890EE3 /* PeripheralExtension.swift in Sources */,
 				61D3AFC622A7B49100674DBE /* CharacteristicController.swift in Sources */,
 				617B104E22A95B4F00C7F384 /* StringExtensions.swift in Sources */,
 				61D3AFD622A7C52400674DBE /* StandardService.swift in Sources */,

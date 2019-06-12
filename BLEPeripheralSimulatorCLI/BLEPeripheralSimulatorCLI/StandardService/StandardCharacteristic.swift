@@ -13,8 +13,8 @@ public class StandardCharacteristic: CharacteristicController {
     public var characteristic: CBMutableCharacteristic
     public var peripheral: CBPeripheralManager?
     
-    var scenario:Stack<BLEAction>?
-    var scenarioDidFinish:((Bool)->())?
+    var scenario:Scenario?
+    var scenarioDidFinish:((Bool,Scenario)->())?
     
     required public init(characteristic:CBMutableCharacteristic) {
         self.characteristic = characteristic
@@ -24,16 +24,22 @@ public class StandardCharacteristic: CharacteristicController {
         print("Did receive read request on \(self.characteristic.uuid)")
         
         if let s = scenario {
-            if let currentAction = s.top,
-                currentAction is CentralReadAction
-                    || currentAction is AckAction {
-                currentAction.performActionFor(request: request,peripheral: peripheral)
+            if let currentAction = s.bleActions.top,
+                currentAction is CentralReadAction {
+                if let actionSuccess = currentAction.performActionFor(request: request,peripheral: peripheral),
+                    actionSuccess == true {
+                    popScenario()
+                }
+            }else if let currentAction = s.bleActions.top,
+                currentAction is AckAction {
+                _ = currentAction.performActionFor(request: request,peripheral: peripheral)
                 popScenario()
             }else{
-                scenarioDidFinish?(false)
+                scenarioDidFinish?(false,s)
             }
+        }else{
+            peripheral.respond(to: request, withResult: .readNotPermitted)
         }
-        
         
     }
     
@@ -41,13 +47,17 @@ public class StandardCharacteristic: CharacteristicController {
         print("Did receive write request on \(self.characteristic.uuid)\n with value \(request.value ?? Data(repeating: 0, count: 0))")
         
         if let s = scenario {
-            if let currentAction = s.top,
+            if let currentAction = s.bleActions.top,
                 currentAction is CentralWriteAction {
-                currentAction.performActionFor(request: request,peripheral: peripheral)
-                popScenario()
+                if let actionSuccess = currentAction.performActionFor(request: request,peripheral: peripheral),
+                    actionSuccess == true {
+                    popScenario()
+                }
             }else{
-                scenarioDidFinish?(false)
+                scenarioDidFinish?(false,s)
             }
+        }else{
+            peripheral.respond(to: request, withResult: .writeNotPermitted)
         }
         
     }
@@ -60,25 +70,26 @@ public class StandardCharacteristic: CharacteristicController {
         peripheral?.updateValue(data, for: characteristic, onSubscribedCentrals: nil)
     }
     
-    func setupScenario(_ scenario:Stack<BLEAction>) {
+    func setupScenario(_ scenario:Scenario?) {
         self.scenario = scenario
         updateCharValueIfNeeded()
     }
     
     func popScenario() {
-        _ = scenario?.pop()
+        _ = scenario?.bleActions.pop()
         updateCharValueIfNeeded()
     }
     
     func updateCharValueIfNeeded() {
-        if let currentAction = self.scenario?.top,
+        if let currentAction = self.scenario?.bleActions.top,
             currentAction is UpdateCharValueAction {
-            currentAction.performActionFor(request: nil,peripheral: self.peripheral)
-            _ = scenario?.pop()
+            _ = currentAction.performActionFor(request: nil,peripheral: self.peripheral)
+            _ = scenario?.bleActions.pop()
         }
         if let s = self.scenario,
-            s.isEmpty {
-            scenarioDidFinish?(true)
+            s.bleActions.isEmpty {
+            ScenarioManager.instance.setupCharsWithScenarioFilePaths(s.nextScenarios)
+            scenarioDidFinish?(true,s)
         }
     }
 

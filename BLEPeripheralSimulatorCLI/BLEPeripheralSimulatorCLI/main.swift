@@ -49,28 +49,24 @@ if CommandLine.argc < 2 {
         let periph = PeripheralController(config: periphGatt)
         try? periph.turnOn()
         
-        let scenarioFileNames = ["AuthScenario.txt"]
+        let scenarioFileNames = ["MoveBlindScenario.txt"]
         
-        for scenarioName in scenarioFileNames {
-            if let (uuid,stack) = ScenarioFactory.buildScenarioFromFileNamed(scenarioName){
-                let char = periph.serviceControllers.first!.characteristics.filter{ $0.characteristic.uuid.uuidString == uuid }.first! as! StandardCharacteristic
-                char.setupScenario(stack)
-                char.scenarioDidFinish = { success in
-                    if success {
-                        print("\(scenarioName) finished")
-                    }else{
-                        print("\(scenarioName) failed")
-                        CFRunLoopStop(runLoop)
-                    }
+        ScenarioManager.instance.setupWithPeripheral(periph)
+        ScenarioManager.instance.setupCharsWithScenarioFilePaths(scenarioFileNames) 
+        
+        periph.standardChars.forEach{
+            $0.scenarioDidFinish = { success,scenario in
+                if success {
+                    print("\(scenario.name) finished")
+                }else{
+                    print("\(scenario.name) failed")
+                    //CFRunLoopStop(runLoop)
                 }
-            }else{
-                fatalError("Corrupted scenario file.")
             }
         }
         
         print("start")
         CFRunLoopRun()
-        //consoleIO.writeMessage("Finished with error", to: OutputType.error)
     }
     
 }
